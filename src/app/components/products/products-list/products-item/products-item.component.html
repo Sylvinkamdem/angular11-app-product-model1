@@ -3,14 +3,11 @@
     <td>{{product.name}}</td>
     <td>{{product.price}}</td>
     <td>{{product.quantity}}</td>
-    <td>{{product.selected}}</td>
-    <td>{{product.available}}</td>
     <td>
-        <button (click)="onSelect(product)" class="btn btn-sm" [ngClass]="product.selected?'btn-success':'btn-danger'">
-            <span *ngIf="product.selected">Unselect</span>
-            <span *ngIf="!product.selected">Select</span>
-        </button>
+        <i [ngClass]="product.selected?'fa-heart':'fa-heart-o'" class="fa text-danger" (click)="onSelect(product)"></i> 
     </td>
+    <td>
+        <i (click)="onAvailable(product)" [ngClass]="product.available?'fa-check-square-o text-success':'fa-ban text-danger'" class="fa"></i></td>
     <td>
         <button (click)="onDelete(product.id)" class="btn btn-sm btn-danger">
             <i class="fa fa-trash-o"></i>

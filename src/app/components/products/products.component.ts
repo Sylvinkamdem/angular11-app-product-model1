@@ -1,11 +1,11 @@
-import { ActionEvent, ProductActionTypes } from "./../../state/product.state";
 import { Component, OnInit, NgModule } from "@angular/core";
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map,startWith,catchError } from 'rxjs/operators';
 import { Product } from 'src/app/model/product.model';
+import { EventDriverService } from "src/app/services/event.driver.service";
 import { ProductsService } from 'src/app/services/products.service';
-import { AppDataState, DataStateEnum } from 'src/app/state/product.state';
+import { AppDataState, DataStateEnum, ActionEvent, ProductActionTypes } from "src/app/state/product.state";
 
 
 @Component({
@@ -18,9 +18,13 @@ export class ProductsComponent implements OnInit {
   readonly DataStateEnum = DataStateEnum;
   readonly pat = ProductActionTypes;
 
-  constructor(private productService:ProductsService, private rouer:Router) { }
+  constructor(private productService: ProductsService, private rouer: Router,
+  private eventDriverService: EventDriverService) { }
 
   ngOnInit(): void {
+    this.eventDriverService.sourceEventSubjectObservable.subscribe((actionEvent: ActionEvent) => {
+      this.onActionEvent(actionEvent);
+    });
   }
 
   onGetAllProducts() {
@@ -63,12 +67,13 @@ export class ProductsComponent implements OnInit {
   }
 
   onDelete(id: number) {
-    let v = confirm('êtes vous sure?');
-    if(v===true)
     this.productService.delete(id)
       .subscribe(() => {
+        this.eventDriverService.publishEvent({
+          type: this.pat.PRODUCT_DELETED
+        });
         this.onGetAllProducts();
-      })
+      });
   }
 
   onNewProduct() {

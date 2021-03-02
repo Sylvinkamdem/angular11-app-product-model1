@@ -37,6 +37,12 @@ export class ProductsService
         return this.http.put<Product>(host + '/products/' + produit.id,produit);
     }
 
+    available(produit: Product): Observable<Product> {
+        let host = environment.host;
+        produit.available = !produit.available;
+        return this.http.put<Product>(host + '/products/' + produit.id, produit);
+    }
+
     delete(id: number): Observable<void> {
         let host = environment.host;
         return this.http.delete<void>(host + '/products/' + id);

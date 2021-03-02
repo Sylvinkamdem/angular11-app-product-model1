@@ -20,9 +20,9 @@
       "id": 3,
       "name": "Smart phone",
       "price": 730,
-      "quantity": 1000,
+      "quantity": 0,
       "selected": false,
-      "available": true
+      "available": false
     },
     {
       "name": "Key board multimedia",
@@ -31,6 +31,14 @@
       "selected": true,
       "available": true,
       "id": 5
+    },
+    {
+      "name": "RAM",
+      "price": 3000,
+      "quantity": 5000,
+      "selected": true,
+      "available": true,
+      "id": 6
     }
   ]
 }
