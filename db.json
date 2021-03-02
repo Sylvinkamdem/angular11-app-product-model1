@@ -19,18 +19,18 @@
     {
       "id": 3,
       "name": "Smart phone",
-      "price": 755,
+      "price": 730,
       "quantity": 1000,
       "selected": false,
-      "available": false
+      "available": true
     },
     {
-      "id": 4,
-      "name": "Souris",
-      "price": 7,
-      "quantity": 0,
-      "selected": false,
-      "available": false
+      "name": "Key board multimedia",
+      "price": 150,
+      "quantity": 2300,
+      "selected": true,
+      "available": true,
+      "id": 5
     }
   ]
 }

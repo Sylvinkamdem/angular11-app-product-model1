@@ -1,0 +1,28 @@
+<div class="container">
+    <ng-container *ngIf="(productsInput$|async) as result" [ngSwitch]="result.dataState">
+        <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+            Loading...
+        </ng-container>
+        <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+            <div class="alert alert-danger">{{result.errorMessage}}</div>
+        </ng-container>
+        <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Selected</th>
+                        <th>Available</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <app-products-item [product]="item" *ngFor="let item of result.data" style="display: contents;"
+                        (prodItemEventEmitter)="onProdItemEventEmitter($event)"></app-products-item>
+                </tbody>
+            </table>
+        </ng-container>
+    </ng-container>
+</div>
